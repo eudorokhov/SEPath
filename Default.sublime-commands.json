@@ -1,0 +1,20 @@
+[
+    {
+        "caption": "SEPath: Open file here",
+        "command": "open_se_path"
+    },
+    {
+        "caption": "Preferences: SEPath Settings - User",
+        "command": "open_file", "args":
+        {
+            "file": "${packages}/User/SEPath.sublime-settings"
+        }
+    },
+    {
+        "caption": "Preferences: SEPath Settings - Default",
+        "command": "open_file", "args":
+        {
+            "file": "${packages}/SEPath/SEPath.sublime-settings"
+        }
+    }
+]
