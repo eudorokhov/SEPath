@@ -8,7 +8,7 @@ To open file path under cursor:
 
 - Linux: <kbd>F5</kbd>
 - Windows: <kbd>F5</kbd>
-- OS X: <kbd>cmd+e</kbd>
+- OS X: <kbd>cmd+\`</kbd>
 
 or through Command Palette <kbd>Ctrl+Shift+P</kbd> find "SEPath: Open file path under cursor"
 

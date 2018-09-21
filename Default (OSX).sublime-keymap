@@ -1,6 +1,6 @@
 [
     {
-        "keys": ["super+e"], 
+        "keys": ["super+`"], 
         "command": "open_se_path"
     }
 ]
