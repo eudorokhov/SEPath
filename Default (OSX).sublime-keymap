@@ -1,6 +1,6 @@
 [
     {
-        "keys": ["f5"], 
+        "keys": ["super+e"], 
         "command": "open_se_path"
     }
 ]
