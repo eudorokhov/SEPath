@@ -1,6 +1,6 @@
 [
     {
-        "keys": ["f2"], 
+        "keys": ["f5"], 
         "command": "open_se_path"
     }
 ]

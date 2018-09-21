@@ -23,7 +23,22 @@
                                     "file": "${packages}/User/SEPath.sublime-settings"
                                 }, 
                                 "command": "open_file"
-                            }
+                            },
+                            { "caption": "-" },
+                            {
+                                "caption": "Key Bindings – Default",
+                                "command": "open_file",
+                                "args": {
+                                    "file": "${packages}/SEPath/Default ($platform).sublime-keymap"
+                                }
+                            },
+                            {
+                                "caption": "Key Bindings – User",
+                                "command": "open_file",
+                                "args": {
+                                    "file": "${packages}/User/Default ($platform).sublime-keymap"
+                                }
+                            },
                         ]
                     }
                 ]
