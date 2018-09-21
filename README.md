@@ -1,6 +1,6 @@
 ## Installation
 
-Install this sublime text 2/3 package via [Package Control]
+Install this sublime text 2/3 package via [Package Control] search for package: "[**SEPath**]
 
 ## Usage
 
@@ -19,7 +19,7 @@ or through Command Palette <kbd>Ctrl+Shift+P</kbd> find "SEPath: Open file path 
 
 There are two options to open  ":/some/path" path: 
 
-1. "none":
+- "none":
 	The path to “data” folder will be found from the tail directory of the active file.
 	If there is no such folder, you will receive  "No 'data' folder discovered" status message. 
 	For example: 
@@ -32,11 +32,11 @@ There are two options to open  ":/some/path" path:
 		If such path doesn’t exist, you will receive the following status message: 
 		 `No filename discovered: /home/data/folder/data/some/path/file.json`
 
-2. `/your/data/directory/absolute/path`:
+- `/your/data/directory/absolute/path`:
 	You have to enter the absolute path to the root folder that has the required files. 
 	The path ":/some/path" will be added to the absolute path, e.g. 
 	 `/your/data/directory/absolute/path/some/path`
 
-##Settings
+## Settings
 
 Settings are accessed via the `Preferences/Package Settings/SEPath`.
