@@ -4,7 +4,7 @@ Install this sublime text 2/3 package via [Package Control]
 
 ## Usage
 
-To prettify JSON, make selection of json (or else it will try to use full view buffer) and press keys:
+To open file path under cursor:
 
 - Linux: <kbd>F5</kbd>
 - Windows: <kbd>F5</kbd>
@@ -32,7 +32,7 @@ There are two options to open  ":/some/path" path:
 		If such path doesn’t exist, you will receive the following status message: 
 		 `No filename discovered: /home/data/folder/data/some/path/file.json`
 
-2. `/your/data/directory/absolute/path`
+2. `/your/data/directory/absolute/path`:
 	You have to enter the absolute path to the root folder that has the required files. 
 	The path ":/some/path" will be added to the absolute path, e.g. 
 	 `/your/data/directory/absolute/path/some/path`
