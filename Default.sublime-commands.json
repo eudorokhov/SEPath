@@ -1,7 +1,11 @@
 [
     {
         "caption": "SEPath: Open file here",
-        "command": "open_se_path"
+        "command": "open_in_subl3"
+    },
+    {
+        "caption": "SEPath: Open file folder",
+        "command": "open_in_file_manager"
     },
     {
         "caption": "Preferences: SEPath Settings - User",

@@ -1,6 +1,10 @@
 [
     {
         "keys": ["f5"], 
-        "command": "open_se_path"
+        "command": "open_in_subl3"
+    },
+    {
+    	"keys": ["ctrl+f5"],
+    	"command": "open_in_file_manager"
     }
 ]

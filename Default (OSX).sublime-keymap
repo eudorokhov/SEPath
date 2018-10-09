@@ -1,6 +1,6 @@
 [
     {
-        "keys": ["super+`"], 
-        "command": "open_se_path"
+        "keys": ["f5"], 
+        "command": "open_in_subl3"
     }
 ]

@@ -20,5 +20,7 @@
 	 *	The path ":/some/path" will be added to the absolute path, e.g. 
 	 *	 "/your/data/directory/absolute/path/some/path"
 	 */
-	"default_data_path": "none"
+	"default_data_path": null,
+	"root_replacement_key": ":/",
+	"root_replacer": "#data"
 }
