@@ -54,7 +54,11 @@ class GetFullPath(sublime_plugin.TextCommand):
 			file = self.get_selected_path(region);
 			if file is None:
 				continue
-			directory = os.path.dirname(self.view.file_name())
+			fn = self.view.file_name()
+			if fn is None:
+				self.view.run_command('save')
+				continue
+			directory = os.path.dirname(fn)
 			if not os.path.isabs(file):
 				if file.startswith(self.root_replacement_key):
 					sublime.status_message("path type: root replacer")
