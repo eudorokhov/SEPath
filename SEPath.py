@@ -10,7 +10,18 @@ class GetFullPath(sublime_plugin.TextCommand):
     self.settings = sublime.load_settings("SEPath.sublime-settings")
     self.root_replacement_key = self.settings.get("root_replacement_key", ":/")
     self.root_replacers = self.settings.get("root_replacers", {})
+    self.root_replacer = self.settings.get("root_replacer", '')
     self.flags = sublime.CLASS_PUNCTUATION_START | sublime.CLASS_PUNCTUATION_END
+
+  def rfind_folder(self, directory, folder):
+    path = directory
+    while os.path.basename(path) != folder:
+      if path == os.path.dirname(path):
+        sublime.status_message('No "{0}" folder discovered \
+          in "{1}"'.format(folder, directory))
+        return None
+      path = os.path.dirname(path)
+    return path
 
   def get_selected_path(self, point, left_seps, right_seps):
     line = self.view.line(point)
@@ -37,7 +48,10 @@ class GetFullPath(sublime_plugin.TextCommand):
       if cur_path.find(path) == 0 and result_path < path:
         result_path = path
     if result_path == '':
-      return None
+      if self.root_replacer == '':
+        return None
+      else:
+        return self.rfind_folder(cur_path, self.root_replacer)
     if self.root_replacers[result_path] != '':
       result_path = self.root_replacers[result_path]
     return result_path
