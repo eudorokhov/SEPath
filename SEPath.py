@@ -25,7 +25,6 @@ class GetFullPath(sublime_plugin.TextCommand):
 
   def get_selected_path(self, point, left_seps, right_seps):
     line = self.view.line(point)
-    print(line.a, line.b, point)
     point -= line.begin()
     selected_row = self.view.substr(line)
     l = -1
@@ -38,10 +37,8 @@ class GetFullPath(sublime_plugin.TextCommand):
       if selected_row[i] in right_seps:
         r = i
         break
-    print(l, selected_row[l], r, selected_row[r])
     if l == -1 or r == -1:
       return None
-    print(selected_row[l + 1 : r])
     return selected_row[l + 1 : r]
 
   def get_base_directory(self):
@@ -94,13 +91,13 @@ class GetFullPath(sublime_plugin.TextCommand):
     return result_paths
 
 def open_in_file_manager(path):
-  print(platform)
   if platform == "win32":
     os.startfile(path)
   elif platform == "darwin":
     subprocess.Popen(["open", path])
   else:
     subprocess.Popen(["xdg-open", path])
+
 
 class OpenCommand(sublime_plugin.TextCommand):
   def run(self, edit):
@@ -114,6 +111,7 @@ class OpenCommand(sublime_plugin.TextCommand):
           self.view.window().open_file(path)
       else:
         sublime.message_dialog('Path not found: "' + path + '"')
+
 
 class OpenInFileManagerCommand(sublime_plugin.TextCommand):
   def run(self, edit):

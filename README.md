@@ -1,5 +1,5 @@
 # SEPath
-This script is needed to quickly open file paths from `sublime text 3`.
+This script allows you to quickly open file paths from the `sublime text 3` in the same place or in the file manager.
 
 # Installation
 
