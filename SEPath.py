@@ -8,52 +8,56 @@ class GetFullPath(sublime_plugin.TextCommand):
   def __init__(self, view):
     self.view = view
     self.settings = sublime.load_settings("SEPath.sublime-settings")
-    self.root_replacement_key = self.settings.get("root_replacement_key", ":/")
-    self.root_replacers = self.settings.get("root_replacers", {})
-    self.root_replacer = self.settings.get("root_replacer", '')
+    self.base_directory_key = self.settings.get("base_directory_key", ":/")
+    self.base_directories = self.settings.get("base_directories", [])
+    self.base_folder_name = self.settings.get("base_folder_name", '')
     self.flags = sublime.CLASS_PUNCTUATION_START | sublime.CLASS_PUNCTUATION_END
 
-  def rfind_folder(self, directory, folder):
+  def rfind_folder(self, directory, base_folder_name):
     path = directory
-    while os.path.basename(path) != folder:
+    while os.path.basename(path) != base_folder_name:
       if path == os.path.dirname(path):
         sublime.status_message('No "{0}" folder discovered \
-          in "{1}"'.format(folder, directory))
+          in "{1}"'.format(base_folder_name, directory))
         return None
       path = os.path.dirname(path)
     return path
 
   def get_selected_path(self, point, left_seps, right_seps):
     line = self.view.line(point)
+    print(line.a, line.b, point)
     point -= line.begin()
     selected_row = self.view.substr(line)
     l = -1
-    r = -1 
-    for i in range(point, 0, -1):
+    for i in range(point - 1, 0, -1):
       if selected_row[i] in left_seps:
         l = i
         break
+    r = -1 
     for i in range(point, len(selected_row)):
       if selected_row[i] in right_seps:
         r = i
         break
+    print(l, selected_row[l], r, selected_row[r])
     if l == -1 or r == -1:
       return None
+    print(selected_row[l + 1 : r])
     return selected_row[l + 1 : r]
 
-  def get_root_replacer_path(self):
+  def get_base_directory(self):
     result_path = ''
     cur_path = os.path.dirname(self.view.file_name())
-    for path in self.root_replacers:
+    for path in self.base_directories:
       if cur_path.find(path) == 0 and result_path < path:
         result_path = path
     if result_path == '':
-      if self.root_replacer == '':
+      if self.base_folder_name == '':
         return None
       else:
-        return self.rfind_folder(cur_path, self.root_replacer)
-    if self.root_replacers[result_path] != '':
-      result_path = self.root_replacers[result_path]
+        return self.rfind_folder(cur_path, self.base_folder_name)
+    if type (self.base_directories) is dict:
+      if self.base_directories[result_path] != '':
+        result_path = self.base_directories[result_path]
     return result_path
 
   def run(self, edit, left_seps, right_seps):
@@ -73,15 +77,15 @@ class GetFullPath(sublime_plugin.TextCommand):
         continue
       if os.path.isabs(selected_path):
         sublime.status_message("path type: full path")
-      elif selected_path.startswith(self.root_replacement_key):
-        sublime.status_message("path type: root replacer path")
-        selected_path = selected_path[len(self.root_replacement_key):]
-        root_replacer_path = self.get_root_replacer_path()
-        if root_replacer_path is None:
-          sublime.message_dialog('Couldn\'t find root replacer path for "' + \
+      elif selected_path.startswith(self.base_directory_key):
+        sublime.status_message("path type: base path")
+        selected_path = selected_path[len(self.base_directory_key):]
+        base_directory = self.get_base_directory()
+        if base_directory is None:
+          sublime.message_dialog('Couldn\'t find base directory for "' + \
             selected_path + '"')
           continue
-        selected_path = os.path.join(root_replacer_path, selected_path)
+        selected_path = os.path.join(base_directory, selected_path)
       else:
         sublime.status_message("path type: relative path")
         current_directory = os.path.dirname(fn)
@@ -98,7 +102,7 @@ def open_in_file_manager(path):
   else:
     subprocess.Popen(["xdg-open", path])
 
-class OpenInSubl3Command(sublime_plugin.TextCommand):
+class OpenCommand(sublime_plugin.TextCommand):
   def run(self, edit):
     get_full_path = GetFullPath(self.view)
     paths = get_full_path.run(edit, '"', '"')

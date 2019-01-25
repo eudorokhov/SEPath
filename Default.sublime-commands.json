@@ -1,7 +1,7 @@
 [
     {
         "caption": "SEPath: Open file here",
-        "command": "open_in_subl3"
+        "command": "open"
     },
     {
         "caption": "SEPath: Open file folder",

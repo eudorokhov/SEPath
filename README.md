@@ -1,42 +1,91 @@
-## Installation
+# SEPath
+This script is needed to quickly open file paths from `sublime text 3`.
 
-Install this sublime text 2/3 package via [Package Control]
+# Installation
 
-## Usage
+Install this `sublime text 3` package via [Package Control]:
+1. Through Command Palette <kbd>Ctrl(Cmd) + Shift + P</kbd> find `Package Control: Add Repository` and add `https://github.com/eudorokhov/SEPath` repository to it.
 
-To prettify JSON, make selection of json (or else it will try to use full view buffer) and press keys:
+2. Through Command Palette <kbd>Ctrl(Cmd) + Shift + P</kbd> find `Package Control: Install Package` and install `SEPath` package.
 
-- Linux: <kbd>F5</kbd>
-- Windows: <kbd>F5</kbd>
-- OS X: <kbd>F5</kbd>
+# Usage
 
-or through Command Palette <kbd>Ctrl+Shift+P</kbd> find "SEPath: Open file path under cursor"
+To open file or folder, click on the path and press <kbd>F5</kbd> key or through Command Palette <kbd>Ctrl(Cmd) + Shift + P</kbd> find `SEPath: Open`
 
 
-## Default configuration
+To open specific path folder in the file manager, click on it and press <kbd>Ctrl + F5</kbd> keys for Linux or Windows or through Command Palette <kbd>Ctrl(Cmd) + Shift + P</kbd> find `SEPath: Open sub path folder`
 
-"default_data_path": "none"
+For OS X, you can add a shortcut in `Preferences/Package Settings/SEPath/Key Bindings - User`.
 
-There are two options to open  ":/some/path" path: 
+### Key bindings template:
 
-1. "none":
-	The path to “data” folder will be found from the tail directory of the active file.
-	If there is no such folder, you will receive  "No 'data' folder discovered" status message. 
-	For example: 
-		A json file has the path:
-		 `/home/data/folder/data/folder/file.json`
-		You click the path:
-		 `:/some/path/file.json`
-		The sublime text 3 then will try to open a file with the path:
-		 `/home/data/folder/data/some/path/file.json`
-		If such path doesn’t exist, you will receive the following status message: 
-		 `No filename discovered: /home/data/folder/data/some/path/file.json`
+```
+[
+    {
+        "keys": ["Your shortcut"], 
+        "command": "open"
+    },
+    {
+      "keys": ["Your shortcut"],
+      "command": "open_in_file_manager"
+    }
+]
+```
 
-2. `/your/data/directory/absolute/path`
-	You have to enter the absolute path to the root folder that has the required files. 
-	The path ":/some/path" will be added to the absolute path, e.g. 
-	 `/your/data/directory/absolute/path/some/path`
+# Settings
 
-##Settings
+Settings are accessed via the `Preferences/Package Settings/SEPath` or through Command Palette `Ctrl(Cmd) + Shift + P`. To find them, write `Preferences: SEPath Settings - User/Default` and click on it.
 
-Settings are accessed via the `Preferences/Package Settings/SEPath`.
+By default you can open only `full` and `relative` path.
+For addition `base` path, you need to add `base_folder_name` or `base_directories` or all at once.
+
+### 0. Settings template
+
+```
+{
+	"base_directory_key" : ":/",
+	"base_folder_name" : "data",
+	"base_directories" : [
+
+	]
+}
+```
+
+### 1. base_directory_key (`"base_directory_key" : ":/"`)
+The base directory key is a string that replaces a part of the full path. 
+
+Let the full path of the file look like this: `/home/user/downloads/project/data/json/books.json`.
+Replace the `/home/user/downloads/project/data` sub path with `:/`, where `:/` is the base directory key. The final path can be written as: `: /json/books.json`.
+
+`root_replacement_key` by default is `:/`.
+
+### 2. base_folder_name (`"base_folder_name" : "base folder name"`)
+`base_folder_name` is the name of the folder that replaces the root. If the path of the current file does not contain one of the `base_directories`, then from the end of the current path, a folder with the `base folder name` will be searched. 
+If a folder with this name is found, then in the path that was clicked, `base_directory_key` will be replaced with the full path to this folder.
+
+### 3. base_directories [list] (`"base_directories" : [base directory]`)
+These settings are used to create different 'base_directories' for different projects.
+```
+{
+	"base_directory_key" : ":/"
+	"base_directories": [
+		"/home/user/project/data",
+		"/home/user/project/build/testdata"
+	]
+}
+```
+
+### 4. base_directories [dict; not fully implemented] (`"base_directories" : {"path, which sub path will be replaced" : "base directory path"}`)
+```
+{
+	"base_directory_key" : ":/"
+	"base_directories": {
+		"/home/user/project/data0" : "",
+		"/home/user/project/data1" : "/home/user/project/data2"
+	}
+}
+```
+
+# License
+
+This project is licensed under the MIT License - see the [LICENSE](https://github.com/eudorokhov/SEPath/blob/master/LICENSE) file for details.

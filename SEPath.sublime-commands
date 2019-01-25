@@ -1,10 +1,10 @@
 [
     {
-        "caption": "SEPath: Open file path under cursor",
-        "command": "open_in_subl3"
+        "caption": "SEPath: Open",
+        "command": "open"
     },
     {
-        "caption": "SEPath: Open file folder",
+        "caption": "SEPath: Open sub path folder",
         "command": "open_in_file_manager"
     },
     {

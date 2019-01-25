@@ -1,4 +1,7 @@
 {
-	"root_replacement_key": ":/",
-  "root_replacers": {}
+  "base_directory_key": ":/",
+  "base_folder_name": "data",
+  "base_directories": [
+
+  ]
 }
