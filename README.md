@@ -10,20 +10,21 @@ Install this `sublime text 3` package via [Package Control]:
 
 # Usage
 
-To open file or folder, click on the path and press <kbd>F5</kbd> key or through Command Palette <kbd>Ctrl(Cmd) + Shift + P</kbd> find `SEPath: Open`
+To open file or folder, click on the path and press <kbd>F5</kbd> key for Linux or Windows or through Command Palette <kbd>Ctrl(Cmd) + Shift + P</kbd> find `SEPath: Open`
 
 
 To open specific path folder in the file manager, click on it and press <kbd>Ctrl + F5</kbd> keys for Linux or Windows or through Command Palette <kbd>Ctrl(Cmd) + Shift + P</kbd> find `SEPath: Open sub path folder`
 
-For OS X, you can add a shortcut in `Preferences/Package Settings/SEPath/Key Bindings - User`.
+
+For OS X, you can add your own shortcuts in `Preferences/Package Settings/SEPath/Key Bindings - User`.
 
 ### Key bindings template:
 
 ```
 [
     {
-        "keys": ["Your shortcut"], 
-        "command": "open"
+      "keys": ["Your shortcut"], 
+      "command": "open"
     },
     {
       "keys": ["Your shortcut"],
