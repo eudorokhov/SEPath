@@ -1,8 +1,5 @@
 import sublime
 import sublime_plugin
-import subprocess
-from sys import platform as platform
-import os
 
 class GetFullPath(sublime_plugin.TextCommand):
   def __init__(self, view):
@@ -90,15 +87,6 @@ class GetFullPath(sublime_plugin.TextCommand):
       result_paths.append(selected_path)
     return result_paths
 
-def open_in_file_manager(path):
-  if platform == "win32":
-    os.startfile(path)
-  elif platform == "darwin":
-    subprocess.Popen(["open", path])
-  else:
-    subprocess.Popen(["xdg-open", path])
-
-
 class OpenCommand(sublime_plugin.TextCommand):
   def run(self, edit):
     get_full_path = GetFullPath(self.view)
@@ -106,7 +94,7 @@ class OpenCommand(sublime_plugin.TextCommand):
     for path in paths:
       if os.path.exists(path):
         if os.path.isdir(path):
-          open_in_file_manager(path)
+          self.view.window().run_command('open_dir', args={'dir': path})
         else:
           self.view.window().open_file(path)
       else:
@@ -121,6 +109,6 @@ class OpenInFileManagerCommand(sublime_plugin.TextCommand):
       if os.path.exists(path):
         if os.path.isfile(path):
           path = os.path.dirname(path)
-        open_in_file_manager(path)
+        self.view.window().run_command('open_dir', args={'dir': path})
       else:
         sublime.status_message('Path not found: "' + path + '"')
