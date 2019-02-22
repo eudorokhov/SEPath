@@ -1,5 +1,6 @@
 import sublime
 import sublime_plugin
+import os.path
 
 class GetFullPath(sublime_plugin.TextCommand):
   def __init__(self, view):
