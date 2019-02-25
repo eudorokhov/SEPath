@@ -4,9 +4,7 @@ This script allows you to quickly open file paths from the `sublime text 3` in t
 # Installation
 
 Install this `sublime text 3` package via [Package Control]:
-1. Through Command Palette <kbd>Ctrl(Cmd) + Shift + P</kbd> find `Package Control: Add Repository` and add `https://github.com/eudorokhov/SEPath` repository to it.
-
-2. Through Command Palette <kbd>Ctrl(Cmd) + Shift + P</kbd> find `Package Control: Install Package` and install `SEPath` package.
+Through Command Palette <kbd>Ctrl(Cmd) + Shift + P</kbd> find `Package Control: Install Package` and install `SEPath` package.
 
 # Usage
 
